@@ -1,4 +1,4 @@
-# Simple usage without command line args
+# Simpler usage of detect_blinks.py without command line args
 
 # USAGE
 # python wink_detection.py

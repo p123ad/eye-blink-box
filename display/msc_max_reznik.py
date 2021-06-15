@@ -1,30 +1,31 @@
 import time
 import digitalio
 import board
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import adafruit_rgb_display.st7735 as st7735  # pylint: disable=unused-import
 from os import listdir
 from os.path import isfile, join
 
-class Display:
-    baudrate = 24000000
-    def __init__(self, cs_pin, dc_pin, reset_pin, display_backlight_pin):
-        self.cs_pin = digitalio.DigitalInOut(cs_pin)
-        self.dc_pin = digitalio.DigitalInOut(dc_pin)
-        self.reset_pin = digitalio.DigitalInOut(reset_pin)
-        self.display_backlight_pin = digitalio.DigitalInOut(display_backlight_pin)
+# # Test of writing a class for the display
+# class Display:
+#     baudrate = 24000000
+#     def __init__(self, cs_pin, dc_pin, reset_pin, display_backlight_pin):
+#         self.cs_pin = digitalio.DigitalInOut(cs_pin)
+#         self.dc_pin = digitalio.DigitalInOut(dc_pin)
+#         self.reset_pin = digitalio.DigitalInOut(reset_pin)
+#         self.display_backlight_pin = digitalio.DigitalInOut(display_backlight_pin)
 
-    def begin(self):
-        # Setup SPI bus using hardware SPI:
-        spi = board.SPI()
-        # 1.8" ST7735R
-        disp = st7735.ST7735R(spi, rotation=90,                           
-                        cs=self.cs_pin,
-                        dc=self.dc_pin,
-                        rst=self.reset_pin,
-                        baudrate=self.baudrate)
-        self.display_backlight_pin.switch_to_output()
-        self.display_backlight_pin.value = True
+#     def begin(self):
+#         # Setup SPI bus using hardware SPI:
+#         spi = board.SPI()
+#         # 1.8" ST7735R
+#         disp = st7735.ST7735R(spi, rotation=90,                           
+#                         cs=self.cs_pin,
+#                         dc=self.dc_pin,
+#                         rst=self.reset_pin,
+#                         baudrate=self.baudrate)
+#         self.display_backlight_pin.switch_to_output()
+#         self.display_backlight_pin.value = True
 
 
 
@@ -45,9 +46,9 @@ def drawImage(imagePath):
     image = image.resize((scaled_width, scaled_height), Image.BICUBIC)
 
     # Crop and center the image
-    x = scaled_width // 2 - width // 2
-    y = scaled_height // 2 - height // 2
-    image = image.crop((x, y, x + width, y + height))
+    x = scaled_width / 2 - width / 2
+    y = scaled_height / 2 - height / 2
+    image = image.crop((x, y, x + width, y + height-6))
 
     # Display image.
     disp.image(image)
@@ -115,9 +116,6 @@ draw = ImageDraw.Draw(image)
 draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 disp.image(image)
 
-drawImage("/home/pi/eye-blink/display/max3.jpg")
-time.sleep(3)
-# Call predefined function to show the GIF to the screen
-showGIF("/home/pi/eye-blink/display/frosch_frame", 3)
+drawImage("/home/pi/eye-blink/display/msc_gimp.jpg")
 
 
