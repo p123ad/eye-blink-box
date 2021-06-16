@@ -1,6 +1,15 @@
 # eye-blink-box
 A Raspberry Pi camera project using computer vision to determine a blinking eye and responding with a gif on an lcd display and a sound
 
+## Get it up and running
+Project is developed in a Python virtual environment
+
+````
+cd eye-blink/
+workon cv
+python final_wink_detection.py
+```` 
+
 
 ## Hardware
 
