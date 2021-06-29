@@ -35,3 +35,6 @@ pip3 install adafruit-blinka
 pip3 install adafruit-io
 pip3 install adafruit-circuitpython-rgb-display
 ````
+
+
+![eye-blink-box](eye-blink-box.png)
